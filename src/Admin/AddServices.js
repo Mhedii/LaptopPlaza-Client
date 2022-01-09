@@ -2,13 +2,13 @@ import React from "react";
 // import "./Add";
 import { useForm } from "react-hook-form";
 import useFirebase from "../hooks/useFirebase";
-
+import Swal from 'sweetalert2';
 const AddServices = () => {
     const { user } = useFirebase();
     const {
         register,
         handleSubmit,
-        // watch,
+        reset,
         formState: { errors },
     } = useForm();
 
@@ -19,8 +19,13 @@ const AddServices = () => {
             body: JSON.stringify(data)
         })
             .then((res) => res.json())
-            .then((result) => console.log(result));
-        console.log(data);
+            .then((result) => {
+                if (data.insertedId) {
+                    Swal.fire("Product has been added!", "", "Success");
+                    reset()
+                }
+                reset()
+            });
     };
     return (
         <div>
@@ -46,7 +51,14 @@ const AddServices = () => {
                                 <input
                                     {...register("description")}
                                     placeholder="Description"
-                                    className="p-2 m-2"
+                                    // className="p-2 m-2"
+                                    className="p-2 m-2 w-100"
+                                />
+                                <br />
+                                <input
+                                    {...register("shortDescription")}
+                                    placeholder="Short Description"
+                                    // className="p-2 m-2"
                                     className="p-2 m-2 w-100"
                                 />
                                 <br />
@@ -54,15 +66,14 @@ const AddServices = () => {
                                 <input
                                     {...register("image", { required: true })}
                                     placeholder="Image Link"
-                                    className="p-2 m-2"
+                                    // className="p-2 m-2"
                                     className="p-2 m-2 w-100"
                                 />
                                 <br />
                                 <input
                                     {...register("price", { required: true })}
                                     placeholder="Price"
-                                    type="number"
-                                    className="p-2 m-2"
+                                    // className="p-2 m-2"
                                     className="p-2 m-2 w-100"
                                 />
                                 <br />

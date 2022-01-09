@@ -22,8 +22,8 @@ const Services = () => {
                                 </div>
                                 <h1>{pd.brand}</h1>
                                 <p>{pd.model}</p>
-                                <p>{pd.description}</p>
-                                <p className="text-danger">{pd.price}</p>
+                                <p>{pd.shortDescription}</p>
+                                <p className="text-danger">{pd.price}৳</p>
                                 <Link to={`/purchasing/${pd._id}`}>
                                     {" "}
                                     <button className="btn btn-success">Buy Now</button>

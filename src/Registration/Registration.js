@@ -8,7 +8,7 @@ const CustomarRegister = () => {
     const { register, handleSubmit, watch, errors } = useForm();
 
     const onSubmit = (data) => {
-        handleUserRegister(data.email, data.password);
+        handleUserRegister(data.email, data.displayName, data.password);
         console.log(data);
     };
     return (
@@ -33,7 +33,7 @@ const CustomarRegister = () => {
                 <input
                     className="input-field"
                     name="phone"
-                    type="number"
+                    type="text"
                     {...register("phone", { required: true })}
                 />
                 <br />

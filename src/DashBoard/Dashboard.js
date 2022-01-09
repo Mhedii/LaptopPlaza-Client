@@ -1,143 +1,62 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes, Link, useMatch } from "react-router-dom";
-
-import "./Dashboard.css";
-import AddServices from "../Admin/AddServices";
-import Review from "./Review";
-import Pay from "../Pay/Pay";
-import MyOrders from "../myOrders/MyOrders";
-import useFirebase from "../hooks/useFirebase";
-import MakeAdmin from "../MakeAdmin/MakeAdmin";
-import ManageOrder from "../ManageOrder/ManageOrder";
-import ManageProduct from "../ManageProducts/ManageProducts";
-// import ManageServices from "../ManageServices/ManageServices";
+import { faColumns, faComment, faFileInvoice, faFolderPlus, faShoppingCart, faSignOutAlt, faTasks, faUser, faUserShield } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Breadcrumb, Button, Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
+import { Link, Outlet } from 'react-router-dom';
+import useFirebase from '../hooks/useFirebase';
+import './Dashboard.css';
 
 const Dashboard = () => {
-    let { path, url } = useMatch();
-    const { user } = useFirebase();
-    const [isAdmin, setisAdmin] = useState(false);
-
-    useEffect(() => {
-        fetch(`http://localhost:5000/checkAdmin/${user?.email}`)
-            .then((res) => res.json())
-            .then((data) => {
-                if (data[0]?.role === "admin") {
-                    setisAdmin(true);
-                } else {
-                    setisAdmin(false);
-                }
-            });
-    }, [user?.email]);
-    console.log(isAdmin);
-    //`Manage All Orders`, `Add A Product`, `Make Admin`, `Manage Products` `Logout`
+    const { handleLogout, admin, user } = useFirebase()
     return (
-        <div>
-            <div className="dashboard-container ">
-                <div className="row">
-                    <div className="col-md-3 ">
-                        <div className="dashboard">
-                            <h5>Dashboard</h5>
-                            {!isAdmin && (
-                                <Link to={`${url}/payment`}>
-                                    <li className="dashboard-menu mt-5">Pay</li>
-                                </Link>
+        <Row className="me-0 px-0">
+            <Col md={3} className="px-0" >
+                <Navbar collapseOnSelect expand="md"  >
+                    <Container className="d-flex flex-column dashboard-route">
 
-                            )}
-                            {!isAdmin && (
-                                <Link to={`${url}/myOrder`}>
-                                    <li className="dashboard-menu mt-5">Order list</li>
-                                </Link>
+                        <Navbar.Brand className="text-dark me-auto fs-2 fw-bold" href="/home">Laptop<span className="text-danger">Plaza</span></Navbar.Brand>
+                        <hr className="w-100 bg-white" />
 
-                            )}
-                            {!isAdmin && (
-                                <Link to={`${url}/review`}>
-                                    <li className="dashboard-menu mt-5">Review</li>
-                                </Link>
+                        <Navbar.Text className="text-dark my-1 fs-4 text-start me-auto">
+                            <FontAwesomeIcon className="text-dark" icon={faColumns} />    Dashboard
+                        </Navbar.Text>
 
-                            )}
-                            {/* <Link to={`${url}/payment`}>
-                                <li className="dashboard-menu mt-5">Pay</li>
-                            </Link>
+                        <Navbar.Toggle className="me-auto text-start" aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse className="me-auto text-start" id="responsive-navbar-nav">
+                            <Nav className="d-flex flex-column fs-6">
+                                {!admin && <>
+                                    <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/myOrder"><FontAwesomeIcon icon={faShoppingCart} /> My Orders</Nav.Link> <br />
 
-                            <Link to={`${url}/myOrder`}>
-                                <li className="dashboard-menu mt-5">Order list</li>
-                            </Link>
-
-                            <Link to={`${url}/review`}>
-                                <li className="dashboard-menu mt-5">Review</li>
-                            </Link> */}
-                            <div className="admin-dashboard">
-                                {/* <li className="dashboard-menu mt-5">Orders list</li> */}
-
-                                {isAdmin && (
-                                    <Link to={`${url}/addService`}>
-                                        <li className="dashboard-menu">Add Service</li>
-                                    </Link>
-
-                                )}
-                                {isAdmin && (
-                                    <Link to={`${url}/allOrder`}>
-                                        <li className="dashboard-menu">Manage Order</li>
-                                    </Link>
+                                    <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/reviews"> <FontAwesomeIcon icon={faComment} /> Add Review</Nav.Link><br />
 
 
-                                )}
-                                {isAdmin && (
-                                    <Link to={`${url}/makeAdmin`}>
-                                        <li className="dashboard-menu">Make Admin</li>
-                                    </Link>
+                                    <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/payment"><FontAwesomeIcon icon={faFileInvoice} /> Payment</Nav.Link><br />
+                                </>}
+                                {admin && <div>
+                                    <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/allOrder"> <i className="fas fa-shopping-bag"></i> Manage  Orders</Nav.Link><br />
+                                    <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/allProducts"> <FontAwesomeIcon icon={faTasks} /> Manage Products</Nav.Link><br />
+                                    <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/addService"><FontAwesomeIcon icon={faFolderPlus} /> Add A Product</Nav.Link><br />
+                                    <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/review"> <FontAwesomeIcon icon={faComment} /> Review</Nav.Link><br />
+                                    <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/makeAdmin"><FontAwesomeIcon icon={faUserShield} /> Make Admin</Nav.Link><br />
+                                </div>}
+                                <hr className="w-100 mx-auto text-dark" />
 
-                                )}
-                                {isAdmin && (
-                                    <Link to={`${url}/allProducts`}>
-                                        <li className="dashboard-menu">Manage Products</li>
-                                    </Link>
-
-                                )}
-
-                                {/* <Link to={`${url}/allOrder`}>
-                                    <li className="dashboard-menu">Manage Order</li>
-                                </Link>
-                                <Link to={`${url}/makeAdmin`}>
-                                    <li className="dashboard-menu">Make Admin</li>
-                                </Link>
-                                <Link to={`${url}/manageServices`}>
-                                    <li className="dashboard-menu">Manage Service</li>
-                                </Link> */}
-
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-9">
-                        <Routes>
-                            <Route path={`${path}/review`} element={<Review />} />
-                            <Route path={`${path}/myOrder`} element={<MyOrders />} />
-                            <Route path={`${path}/payment`} element={<Pay />} />
-                            <Route path={`${path}/makeAdmin`} element={<MakeAdmin />} />
-                            <Route path={`${path}/addService`} element={<AddServices />} />
-                            <Route path={`${path}/allOrder`} element={<ManageOrder />} />
-                            <Route path={`${path}/allProducts`} element={<ManageProduct />} />
-                        </Routes>
-
-                        {/* <Route exact path={path}>
-                                <MyOrders></MyOrders>
-                            </Route> */}
-
-
-                        {/* <Route exact path={`${path}/myOrders`}>
-                                <MyOrders></MyOrders>
-                            </Route> */}
-
-                        {/* </Route>
-                            <Route exact path={`${path}/OrderList`}>
-                                <MyOrders></MyOrders>
-                            </Route> */}
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
+                                <h6 className="text-dark ">{admin ? <FontAwesomeIcon icon={faUserShield} /> : <FontAwesomeIcon icon={faUser} />}   {user.displayName}</h6>
+                                <Link to="/"><Button variant="dark" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} /> Logout</Button></Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+            </Col>
+            <Col md={9} className="px-0">
+                <Breadcrumb className="my-4  ms-3 home-Breadcrumb">
+                    <Breadcrumb.Item href="/home" className="fs-4 ">Home</Breadcrumb.Item>
+                    <Breadcrumb.Item className="fs-4"> Dashboard</Breadcrumb.Item>
+                </Breadcrumb>
+                <hr />
+                <Outlet></Outlet>
+            </Col>
+        </Row>
     );
 };
 

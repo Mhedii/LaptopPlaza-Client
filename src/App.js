@@ -19,6 +19,12 @@ import AboutUs from './AboutUs/AboutUs';
 import NotFound from './NotFound/NotFound';
 import Purchase from './Purchase/Purchase';
 import MyOrders from './myOrders/MyOrders';
+import ManageOrder from './ManageOrder/ManageOrder';
+import ManageProduct from './ManageProducts/ManageProducts';
+import Review from './DashBoard/Review';
+import MakeAdmin from './MakeAdmin/MakeAdmin';
+import Pay from './Pay/Pay';
+import ReviewForm from './DashBoard/Review/ReviewForm';
 
 function App() {
   return (
@@ -34,7 +40,16 @@ function App() {
           <Route path="/register" element={<Registration />} />
           <Route path="/explore" element={<Services />} />
           <Route path="/add" element={<AddServices />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} >
+            <Route path="/dashboard/addService" element={<AddServices />} ></Route>
+            <Route path="/dashboard/allOrder" element={<ManageOrder />} ></Route>
+            <Route path="/dashboard/myOrder" element={<MyOrders />} ></Route>
+            <Route path="/dashboard/allProducts" element={<ManageProduct />} ></Route>
+            <Route path="/dashboard/reviews" element={<ReviewForm />} ></Route>
+            <Route path="/dashboard/review" element={<Review />} ></Route>
+            <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} ></Route>
+            <Route path='/dashboard/payment' element={<Pay />}></Route>
+          </Route>
           <Route path="//purchasing/:serviceId" element={<Purchase />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/myOrder" element={<MyOrders />} />
