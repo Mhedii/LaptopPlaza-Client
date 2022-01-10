@@ -19,7 +19,7 @@ const ReviewForm = () => {
     const onSubmit = (data) => {
         data.name = user.displayName
         data.email = user.email
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://laptop-plaza.herokuapp.com/reviews', {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),

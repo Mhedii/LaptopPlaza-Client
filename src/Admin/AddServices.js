@@ -1,19 +1,19 @@
 import React from "react";
 // import "./Add";
 import { useForm } from "react-hook-form";
-import useFirebase from "../hooks/useFirebase";
+// import useFirebase from "../hooks/useFirebase";
 import Swal from 'sweetalert2';
 const AddServices = () => {
-    const { user } = useFirebase();
+    // const { user } = useFirebase();
     const {
         register,
         handleSubmit,
         reset,
-        formState: { errors },
+        // formState: { errors },
     } = useForm();
 
     const onSubmit = (data) => {
-        fetch("http://localhost:5000/add", {
+        fetch("https://laptop-plaza.herokuapp.com/add", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data)

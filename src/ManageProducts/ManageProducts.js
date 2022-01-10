@@ -17,14 +17,14 @@ const ManageProduct = () => {
 
     console.log(status);
     useEffect(() => {
-        fetch("http://localhost:5000/allProducts")
+        fetch("https://laptop-plaza.herokuapp.com/allProducts")
             .then((res) => res.json())
             .then((data) => setOrders(data));
     }, []);
 
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/deleteProducts/${id}`, {
+        fetch(`https://laptop-plaza.herokuapp.com/deleteProducts/${id}`, {
             method: "DELETE",
         })
             .then((res) => res.json())

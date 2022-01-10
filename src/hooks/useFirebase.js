@@ -41,7 +41,7 @@ const useFirebase = () => {
     }
     const saveUser = (email, displayName, method) => {
         const user = { email, displayName };
-        fetch('http://localhost:5000/users', {
+        fetch('https://laptop-plaza.herokuapp.com/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'
@@ -88,7 +88,7 @@ const useFirebase = () => {
 
     const hanldeUserInfoRegister = (email, displayName) => {
 
-        fetch("http://localhost:5000/addUserInfo", {
+        fetch("https://laptop-plaza.herokuapp.com/addUserInfo", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({ email, displayName }),
@@ -121,7 +121,7 @@ const useFirebase = () => {
             });
     };
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user.email}`)
+        fetch(`https://laptop-plaza.herokuapp.com/users/${user.email}`)
             .then(res => res.json())
             .then(data => setAdmin(data.admin))
     }, [user.email])
