@@ -1,12 +1,9 @@
 import React from 'react';
 import { Card, CardGroup, Carousel, } from 'react-bootstrap';
-import Review from '../DashBoard/Review';
 import SeeReview from '../DashBoard/SeeReview';
-import FooterPage from '../Footer/FooterPage';
 import "../Header/Header";
 import FirstPageService from '../Services/FirstPageService';
-import Services from '../Services/Services';
-import Banner2 from './Banner2';
+
 const Home = () => {
 
     return (
@@ -14,12 +11,12 @@ const Home = () => {
 
 
             {/* Banner */}
-            {/* <Banner2></Banner2> */}
+
             <div>
                 <Carousel >
-                    <Carousel.Item className="text-primary w-100 image-fluid">
+                    <Carousel.Item className="text-primary ">
                         <img
-                            className="d-block w-100"
+                            className="mb-5"
                             src="https://www.startech.com.bd/image/cache/catalog/laptop/avita/megus/magus-laptop-pastel-violet-500x500.jpg"
                             alt="First slide"
                         />
@@ -30,7 +27,7 @@ const Home = () => {
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
-                            className="d-block w-100"
+                            className="mb-5"
                             src="https://www.startech.com.bd/image/cache/catalog/laptop/asus/fx506lh/fx506lh-1-500x500.jpg"
                             alt="Second slide"
                         />
@@ -42,7 +39,7 @@ const Home = () => {
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
-                            className="d-block w-100"
+                            className="mb-5"
                             src="https://www.startech.com.bd/image/cache/catalog/laptop/acer/aspire-5/aspire-5-001-500x500.jpg"
                             alt="Third slide"
                         />

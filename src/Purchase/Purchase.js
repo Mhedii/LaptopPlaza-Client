@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import "./purchasing";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 
 const Purchase = () => {
@@ -20,7 +21,6 @@ const Purchase = () => {
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm();
 
@@ -41,20 +41,21 @@ const Purchase = () => {
 
     return (
         <div>
-            <h1 className="text-danger">purchasing From</h1>
+            <h1 className="text-danger">purchasing Form</h1>
 
-            <div className="booking-container">
+            <div className=" container">
                 <div className="row container">
                     <div className="col-md-6">
                         <div className="details-img">
                             <img className="w-75" src={service?.image} alt="" />
                         </div>
-                        <p className="fs-5">{service?.description}</p>
+
                         <h4> Brand: {service?.brand} </h4>
                         <h4> model: {service?.model} </h4>
                         <h4 className="text-danger"> price: {service?.price}</h4>
+                        <p className="fs-6">{service?.description}</p>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 mt-5">
 
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <input
@@ -103,20 +104,13 @@ const Purchase = () => {
 
                             {errors.exampleRequired && <span>This field is required</span>}
 
-                            <input
-                                type="submit"
-                                value="Buy Now"
-                                className="btn btn-info w-50"
-                            // onClick={}
-                            //     `{
-                            // user.displayName?
-                            // <Link to={"/ myBooking"}>:
 
-                            // <Link to={"/ login"}>
 
-                            // </Link>
-                            //         }`}
-                            />
+                            <Link to={"/dashboard/payment"}>
+                                {" "}
+                                <button className="btn btn-success">Buy Now</button>
+                            </Link>
+
 
                         </form>
                     </div>

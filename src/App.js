@@ -25,6 +25,10 @@ import Review from './DashBoard/Review';
 import MakeAdmin from './MakeAdmin/MakeAdmin';
 import Pay from './Pay/Pay';
 import ReviewForm from './DashBoard/Review/ReviewForm';
+import ContactUs from './Home/ContactUs';
+import ProtectedRoute from './Route/ProtectedRoute';
+import AdminRoute from './Route/AdminRoute';
+// import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -40,17 +44,19 @@ function App() {
           <Route path="/register" element={<Registration />} />
           <Route path="/explore" element={<Services />} />
           <Route path="/add" element={<AddServices />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="dashboard" element={<Dashboard />} >
-            <Route path="/dashboard/addService" element={<AddServices />} ></Route>
-            <Route path="/dashboard/allOrder" element={<ManageOrder />} ></Route>
+            <Route path="/dashboard/addService" element={<AdminRoute><AddServices /></AdminRoute>} ></Route>
+            <Route path="/dashboard/allOrder" element={<AdminRoute><ManageOrder /></AdminRoute>} ></Route>
             <Route path="/dashboard/myOrder" element={<MyOrders />} ></Route>
-            <Route path="/dashboard/allProducts" element={<ManageProduct />} ></Route>
+            <Route path="/dashboard/allProducts" element={<AdminRoute><ManageProduct /></AdminRoute>} ></Route>
             <Route path="/dashboard/reviews" element={<ReviewForm />} ></Route>
             <Route path="/dashboard/review" element={<Review />} ></Route>
-            <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} ></Route>
+            <Route path="/dashboard/makeAdmin" element={<AdminRoute><MakeAdmin /></AdminRoute>} ></Route>
             <Route path='/dashboard/payment' element={<Pay />}></Route>
           </Route>
-          <Route path="//purchasing/:serviceId" element={<Purchase />} />
+          <Route path="/purchasing/:serviceId" element={<ProtectedRoute><Purchase /></ProtectedRoute>} />
+          {/* <Route path="//purchasing/:serviceId" element={<PrivateRoute><Purchase /></PrivateRoute>} /> */}
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/myOrder" element={<MyOrders />} />
           <Route path="/*" element={<NotFound />} />

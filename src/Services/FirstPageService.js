@@ -16,7 +16,7 @@ const FirstPageService = () => {
             <div className="services container">
                 <div className="row container">
                     {services.slice(0, 6)?.map((pd, index) => (
-                        <div className="col-md-6 col-lg-4">
+                        <div className="col-md-6 col-lg-4 ">
                             <div className="service p-3 border border  m-2">
                                 <div className="service-img">
                                     <img className="w-50" src={pd?.image} alt="" />

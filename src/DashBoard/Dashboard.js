@@ -26,17 +26,13 @@ const Dashboard = () => {
                             <Nav className="d-flex flex-column fs-6">
                                 {!admin && <>
                                     <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/myOrder"><FontAwesomeIcon icon={faShoppingCart} /> My Orders</Nav.Link> <br />
-
                                     <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/reviews"> <FontAwesomeIcon icon={faComment} /> Add Review</Nav.Link><br />
-
-
                                     <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/payment"><FontAwesomeIcon icon={faFileInvoice} /> Payment</Nav.Link><br />
                                 </>}
                                 {admin && <div>
                                     <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/allOrder"> <i className="fas fa-shopping-bag"></i> Manage  Orders</Nav.Link><br />
                                     <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/allProducts"> <FontAwesomeIcon icon={faTasks} /> Manage Products</Nav.Link><br />
                                     <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/addService"><FontAwesomeIcon icon={faFolderPlus} /> Add A Product</Nav.Link><br />
-                                    <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/review"> <FontAwesomeIcon icon={faComment} /> Review</Nav.Link><br />
                                     <Nav.Link className='text-dark fw-bold' as={Link} to="/dashboard/makeAdmin"><FontAwesomeIcon icon={faUserShield} /> Make Admin</Nav.Link><br />
                                 </div>}
                                 <hr className="w-100 mx-auto text-dark" />

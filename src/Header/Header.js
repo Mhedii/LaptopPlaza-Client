@@ -25,7 +25,13 @@ const Header = () => {
                             <Nav.Link href="/home">Home</Nav.Link>
                             <Nav.Link href="/explore">Explore</Nav.Link>
                             <Nav.Link href="/aboutus">AboutUs</Nav.Link>
-                            <Nav.Link href="/dashboard">DashBoard</Nav.Link>
+                            <Nav.Link href="/contact">Contact Us</Nav.Link>
+
+                            {user.email &&
+                                <li className="nav-item ">
+                                    <Nav.Link href="/dashboard">DashBoard</Nav.Link>
+                                </li>
+                            }
                             {/* <Nav.Link href="/myOrders">My Orders</Nav.Link>
                             <Nav.Link href="/add">Add Services</Nav.Link> */}
 

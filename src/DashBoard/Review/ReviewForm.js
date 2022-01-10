@@ -35,7 +35,7 @@ const ReviewForm = () => {
         <div className="">
             <h3 className="page-title">WRITE A REVIEW</h3>
             <div className="container ">
-                <form className="row  addproduct-from" onSubmit={handleSubmit(onSubmit)}>
+                <form className="row  container" onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="col-md-6 mt-5">
                         <input type="text" placeholder={user.displayName} className="form-control"
@@ -47,13 +47,13 @@ const ReviewForm = () => {
                             disabled />
                     </div>
 
-                    <div className="col-md-12">
+                    <div className="col-md-12 mt-3">
                         <input type="description" className="form-control h-100" placeholder='Write Feedback'
                             {...register("description", { required: true })} />
                     </div>
 
                     <div className="col-md-6 text-start">
-                        <label className="form-label fs-3 fw-bold mt-3">Rating</label>
+                        <label className="form-label fs-3 fw-bold mt-3">Rating </label><br />
                         <span
                             {...getStarWrapperProps({
                                 style: {

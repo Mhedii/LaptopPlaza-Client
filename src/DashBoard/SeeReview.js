@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 const SeeReview = () => {
     const [reviews, setReviews] = useState([]);
@@ -12,14 +11,14 @@ const SeeReview = () => {
     return (
         <div>
             <h1 className="text-primary m-5">Reviews</h1>
-            <div className="services">
+            <div className="services container">
                 <div className="row container">
                     {reviews?.map((pd, index) => (
                         <div className="col-md-6 col-lg-4">
                             <div className="service p-3 border border m-2">
 
                                 <h5>{pd.email}</h5>
-                                <p>{pd.comments}</p>
+                                <p>{pd.description}</p>
                                 <p>Rating: {pd.rating}</p>
 
 

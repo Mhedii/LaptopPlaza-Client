@@ -5,12 +5,12 @@ import useFirebase from "../hooks/useFirebase";
 
 const Login = () => {
     const { handleGoogleLogin } = useFirebase();
-    // console.log(handleGoogleLogin());
-    const { googleSignIn, handleUserRegister, handleUserLogin } = useFirebase();
-    const { register, handleSubmit, watch, errors } = useForm();
+
+    const { handleUserLogin } = useFirebase();
+    const { register, handleSubmit, } = useForm();
 
     const onSubmit = (data) => {
-        // handleUserRegister(data.email, data.password);
+
         handleUserLogin(data.email, data.password);
         console.log(data);
     };

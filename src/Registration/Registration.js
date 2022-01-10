@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import useFirebase from "../hooks/useFirebase";
 import "./Registration.css"
 
 const CustomarRegister = () => {
-    const { googleSignIn, handleUserRegister } = useFirebase();
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { handleUserRegister, hanldeUserInfoRegister } = useFirebase();
+    const { register, handleSubmit } = useForm();
 
     const onSubmit = (data) => {
         handleUserRegister(data.email, data.displayName, data.password);
+        hanldeUserInfoRegister(data.email, data.displayName);
+
         console.log(data);
     };
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
+
                 <input
                     className="input-field"
                     name="displayName"
                     placeholder="Name"
-
+                    type="text"
                     {...register("displayName", { required: true })}
                 />
                 <br />

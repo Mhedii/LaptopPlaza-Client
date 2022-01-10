@@ -12,7 +12,7 @@ const Services = () => {
     return (
         <div>
             <h1>Services</h1>
-            <div className="services">
+            <div className="services container">
                 <div className="row container">
                     {services?.map((pd, index) => (
                         <div className="col-md-6 col-lg-4">

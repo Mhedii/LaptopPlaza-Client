@@ -7,7 +7,7 @@ import {
     signOut,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    updateProfile
+
 } from "firebase/auth";
 
 import { useEffect, useState } from "react";
@@ -25,20 +25,6 @@ const useFirebase = () => {
 
     const [admin, setAdmin] = useState(false);
 
-
-
-
-
-    // const handleGoogleLogin = () => {
-    //     signInWithPopup(auth, provider)
-    //         .then((result) => {
-    //             setUser(result.user);
-    //             sessionStorage.setItem("email", result.user.email);
-    //             // console.log(result.user);
-    //             setError("");
-    //         })
-    //         .catch((error) => setError(error.message));
-    // };
     const handleGoogleLogin = (location, navigate) => {
         setIsLoading(true);
         signInWithPopup(auth, provider)
@@ -73,9 +59,11 @@ const useFirebase = () => {
             } else {
                 // User is signed out
                 // ...
+                setUser({})
             }
+            setIsLoading(false)
         });
-    }, []);
+    }, [auth]);
 
     const handleLogout = () => {
         signOut(auth)
@@ -91,42 +79,37 @@ const useFirebase = () => {
         createUserWithEmailAndPassword(auth, email, displayName, password)
             .then((result) => {
                 console.log(result.user);
-                hanldeUserInfoRegister(result.user.email, result.user.displayName, result.user.password);
+
             })
             .catch((error) => {
                 const errorMessage = error.message;
             });
     };
 
-    const hanldeUserInfoRegister = (email, displayName, password) => {
+    const hanldeUserInfoRegister = (email, displayName) => {
+
         fetch("http://localhost:5000/addUserInfo", {
             method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify({ email, displayName, password }),
+            body: JSON.stringify({ email, displayName }),
         })
             .then((res) => res.json())
             .then((result) => console.log(result));
     };
-    // const handleUserRegister = (email, password, name, navigate) => {
-    //     setIsLoading(true);
-    //     createUserWithEmailAndPassword(auth, email, password)
-    //         .then((userCredential) => {
-    //             setAuthError('');
-    //             const newUser = { email, displayName: name };
-    //             setUser(newUser);
-    //             saveUser(email, name, 'POST');
-    //             updateProfile(auth.currentUser, {
-    //                 displayName: name
-    //             }).then(() => {
-    //             }).catch((error) => {
-    //             });
-    //             navigate('/');
+
+
+
+
+    // const handleGoogleLogin = () => {
+    //     signInWithPopup(auth, provider)
+    //         .then((result) => {
+    //             setUser(result.user);
+    //             sessionStorage.setItem("email", result.user.email);
+    //             // console.log(result.user);
+    //             setError("");
     //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         })
-    //         .finally(() => setIsLoading(false));
-    // }
+    //         .catch((error) => setError(error.message));
+    // };
 
     const handleUserLogin = (email, password) => {
         signInWithEmailAndPassword(auth, email, password)
@@ -149,7 +132,8 @@ const useFirebase = () => {
         handleLogout,
         handleUserRegister, handleUserLogin,
         admin,
-
+        isLoading,
+        hanldeUserInfoRegister
     };
 };
 
