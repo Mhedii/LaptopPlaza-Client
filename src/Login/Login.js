@@ -6,13 +6,15 @@ import useFirebase from "../hooks/useFirebase";
 const Login = () => {
     const { handleGoogleLogin } = useFirebase();
 
-    const { handleUserLogin } = useFirebase();
-    const { register, handleSubmit, } = useForm();
+    const { googleSignIn, handleUserRegister, handleUserLogin } = useFirebase();
+    const { register, handleSubmit, watch, errors } = useForm();
 
     const onSubmit = (data) => {
 
         handleUserLogin(data.email, data.password);
-        console.log(data);
+
+        // console.log(data);
+        // data.preventDefault();
     };
     return (
         <div>
@@ -33,6 +35,7 @@ const Login = () => {
                         name="password"
                         type="password"
                         placeholder="Password"
+                        // autoComplete="on"
                         {...register("password", { required: true })}
                     />
                     <br />

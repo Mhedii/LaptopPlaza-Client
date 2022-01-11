@@ -6,7 +6,7 @@ import {
     onAuthStateChanged,
     signOut,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
+    signInWithEmailAndPassword
 
 } from "firebase/auth";
 
@@ -18,7 +18,7 @@ const useFirebase = () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
     const [user, setUser] = useState({});
-    // const [error, setError] = useState("");
+    const [error, setError] = useState("");
     const [authError, setAuthError] = useState('');
 
     const [isLoading, setIsLoading] = useState(true);
@@ -51,19 +51,6 @@ const useFirebase = () => {
             .then()
     };
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user);
-                const uid = user.uid;
-            } else {
-                // User is signed out
-                // ...
-                setUser({})
-            }
-            setIsLoading(false)
-        });
-    }, [auth]);
 
     const handleLogout = () => {
         signOut(auth)
@@ -75,8 +62,8 @@ const useFirebase = () => {
             });
     };
 
-    const handleUserRegister = (email, displayName, password) => {
-        createUserWithEmailAndPassword(auth, email, displayName, password)
+    const handleUserRegister = (email, password) => {
+        createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 console.log(result.user);
 
@@ -98,28 +85,46 @@ const useFirebase = () => {
     };
 
 
-
-
-    // const handleGoogleLogin = () => {
-    //     signInWithPopup(auth, provider)
-    //         .then((result) => {
-    //             setUser(result.user);
-    //             sessionStorage.setItem("email", result.user.email);
-    //             // console.log(result.user);
-    //             setError("");
-    //         })
-    //         .catch((error) => setError(error.message));
-    // };
-
     const handleUserLogin = (email, password) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 console.log(result.user);
+
             })
             .catch((error) => {
                 const errorMessage = error.message;
             });
     };
+    const loginUser = (email, password, location, navigate) => {
+        setIsLoading(true);
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const destination = location?.state?.from || '/';
+                navigate(destination);
+                setAuthError('');
+            })
+            .catch((error) => {
+                setAuthError(error.message);
+            })
+            .finally(() => setIsLoading(false));
+    }
+
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+                const uid = user.uid;
+            } else {
+                // User is signed out
+                // ...
+                setUser({})
+            }
+            setIsLoading(false)
+        });
+    }, [auth]);
+
+
     useEffect(() => {
         fetch(`https://laptop-plaza.herokuapp.com/users/${user.email}`)
             .then(res => res.json())
@@ -133,7 +138,8 @@ const useFirebase = () => {
         handleUserRegister, handleUserLogin,
         admin,
         isLoading,
-        hanldeUserInfoRegister
+        hanldeUserInfoRegister,
+        loginUser
     };
 };
 
